@@ -58,3 +58,4 @@ A `list[tuple]`
 #### Known Issues
 
 1. `.env` file *must* be in `UTF-8`, not `UTF-8-BOM`
+2. If `psycopg2` starts acting up, replace with `psycopg2-binary`
