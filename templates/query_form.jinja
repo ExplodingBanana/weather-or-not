@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Weather</title>
+</head>
+
+<body>
+    <a href="/history">See history</a>
+    <form method="post" style="width: fit-content;">
+        <fieldset>
+        <legend>Choose wisely:</legend>
+            <input type="search" id="city_name" name="city_name" />
+            <div>
+                <input type="radio" id="metric" name="units" value="metric" checked />
+                <label for="metric">Celcius</label>
+                <input type="radio" id="imperial" name="units" value="imperial" />
+                <label for="imperial">Farenhait</label>
+                <input type="radio" id="kalvin" name="units" value="default" />
+                <label for="kalvin">Kalvin</label>
+            </div>
+            <input type="submit">
+        </fieldset>
+    </form>
+
+    {% block report %}
+
+    {% endblock report %}
+
+</body>
+
+</html>

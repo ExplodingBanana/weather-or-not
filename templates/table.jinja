@@ -1,0 +1,24 @@
+{% extends "history.jinja" %}
+{% block page %}
+{% if queries %}
+{% for query in queries %}
+<tr>
+    <td>{{ query[0] }}</td>
+    <td>{{ query[1] }}</td>
+    <td>{{ query[3] }}</td>
+    {% if not query[7] %}
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    {% else %}
+    <td>{{ query[2] }}</td>
+    <td>{{ query[4] }}</td>
+    <td>{{ query[5] }}</td>
+    <td>{{ query[6] }}</td>
+    {% endif %}
+    <td>{{ query[7] }}</td>
+</tr>
+{% endfor %}
+{% endif %}
+{% endblock page %}

@@ -1,0 +1,17 @@
+{% extends "query_form.jinja" %}
+{% block report %}
+<ul id="report">
+    {% if weather.cod == "404" %}
+    <li>
+        <h1>Sry, no city</h1>
+    </li>
+    {% else %}
+    <h1>{{ weather.name }}, {{ weather.sys.country }} (in {{ weather.units }})</h1>
+    <li>Overall weather: {{ weather.weather[0].description }}</li>
+    <li>Currently it's {{ weather.main.temp }}°, although it feels like {{ weather.main.feels_like }}</li>
+    <li>Humidity is {{ weather.main.humidity }}%. Pressure's at {{ weather.main.pressure }}</li>
+    <li>Clouds cover {{ weather.clouds.all }}% of the sky</li>
+    <li>Wind speed: {{ weather.wind.speed }}</li>
+    {% endif %}
+</ul>
+{% endblock report %}

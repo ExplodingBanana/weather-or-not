@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Query history</title>
+</head>
+
+<body  onload="persistSelection()">
+<a href="/weather">See weather</a>
+    <table>
+        <tr>
+            <th>DateTime</th>
+            <th>City</th>
+            <th>Units</th>
+            <th>Description</th>
+            <th>Temperature</th>
+            <th>Pressure</th>
+            <th>Humidity</th>
+            <th>Success</th>
+        </tr>
+        {% block page %}
+
+        {% endblock page %}
+    </table>
+    <button id="back" onclick="goBack()">Back</button>
+    <button id="forward" onclick="goForward()">Forward</button>
+    <br>
+    Page size: 
+    <select id="select" onchange="changePageSize(this)">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+
+    <script>
+        function goBack() {
+            var params = new URLSearchParams(window.location.search);
+            var page = params.get("page");
+            if (page > 0) {
+                page -= 1;
+            }
+            else {
+                page = 0;
+            }
+            var page_size = params.get("page_size");
+            if (!page_size){
+                page_size = 10;
+            }
+            window.location.search = "?page=" + page + "&page_size=" + page_size
+        }
+
+        function goForward() {
+            var params = new URLSearchParams(window.location.search);
+            var page = parseInt(params.get("page")) + 1;
+            var page_size = params.get("page_size");
+            if (!page_size){
+                page_size = 10;
+            }
+            window.location.search = "?page=" + page + "&page_size=" + page_size
+        }
+
+        function changePageSize(selectObject) {
+            var params = new URLSearchParams(window.location.search);
+            
+            var page = parseInt(params.get("page"));
+            if (!page) {
+                page = 0;
+            }
+            window.location.search = "?page=" + page + "&page_size=" + selectObject.value;
+            localStorage.setItem("select", selectObject.value)
+        }
+
+        function persistSelection() {
+            var selectObject = document.getElementById("select");
+            selectObject.value = localStorage.getItem("select");
+        }
+    </script>
+</body>
