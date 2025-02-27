@@ -7,7 +7,7 @@ BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid=
 API_KEY = get_key(".env", "API_KEY")
 
 if API_KEY is None:
-    raise Exception("Please set DB_PASSWORD in the .env file")
+    raise Exception("Please set API_KEY in the .env file")
 
 
 class Units(str, Enum):

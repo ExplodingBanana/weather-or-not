@@ -4,11 +4,17 @@ from dotenv import get_key
 
 from app.weather_api import Units
 
-PASSWORD = get_key(".env", "API_KEY")
+PASSWORD = get_key(".env", "DB_PASSWORD")
 if PASSWORD is None:
     raise Exception("Please set DB_PASSWORD in the .env file")
 
-CONNECTION = psycopg2.connect(f"dbname=weather user=postgres password={PASSWORD}")
+DBNAME = get_key(".env", "DB_NAME")
+DBNAME = DBNAME if DBNAME else "weather"
+
+USER = get_key(".env", "USER")
+USER = USER if USER else "postgres"
+
+CONNECTION = psycopg2.connect(database=DBNAME, user="postgres", password=PASSWORD)
 
 CURSOR = CONNECTION.cursor()
 
